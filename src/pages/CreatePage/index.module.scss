@@ -1,0 +1,17 @@
+.create-page {
+  background-color: $background_color;
+  height: 100%;
+  padding-top: 100px;
+  padding-bottom: 200px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+}

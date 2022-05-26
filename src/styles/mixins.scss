@@ -1,0 +1,29 @@
+@use "./variables" as *;
+
+@mixin textRoboto($size, $weight, $line, $color: $primary_color) {
+  font-family: Roboto;
+  font-size: $size;
+  line-height: $line;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin textInter($size, $weight, $line, $color: $primary_color) {
+  font-family: Inter;
+  font-size: $size;
+  line-height: $line;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin button($color: $primary_color) {
+  display: flex;
+  padding: 10px 15px;
+  border: none;
+  background-color: $color;
+  border-radius: 10px;
+
+  span {
+    @include textInter(16px, 500, 21px, #fff);
+  }
+}
