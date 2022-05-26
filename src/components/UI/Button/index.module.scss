@@ -12,3 +12,17 @@
     align-items: center;
   }
 }
+.button-danger {
+  @include button($danger_color);
+  width: 100%;
+  height: 100%;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

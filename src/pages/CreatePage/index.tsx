@@ -10,9 +10,15 @@ const CreatePage: FC<CreatePageProps> = () => {
       <div className="container">
         <div className={classNames["create-page__content"]}>
           <div className={classNames["create-page__buttons"]}>
-            <Button>Отменить</Button>
-            <Button>Сохранить</Button>
+            <div className={classNames.button_container}>
+              <Button type="danger">Отменить</Button>
+            </div>
+            <div className={classNames.button_container}>
+              <Button>Сохранить</Button>
+            </div>
           </div>
+          <div></div>
+          <div></div>
         </div>
       </div>
     </div>

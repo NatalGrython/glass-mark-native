@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import WorkSpaceButton from "../../components/WorkSpaceButton";
 import AddWorkSpace from "../../icons/AddWorkSpace";
@@ -8,6 +9,12 @@ import Logo from "./Logo";
 interface MainPageProps {}
 
 const MainPage: FC<MainPageProps> = () => {
+  const navigation = useNavigate();
+
+  const onClickCreate = () => {
+    navigation("/create");
+  };
+
   return (
     <div className={classNames.main}>
       <div className={classNames.main__container}>
@@ -21,7 +28,9 @@ const MainPage: FC<MainPageProps> = () => {
                 Рабочие области
               </span>
               <div className={classNames["button-add"]}>
-                <Button icon={AddWorkSpace}>Создать новый</Button>
+                <Button onClick={onClickCreate} icon={AddWorkSpace}>
+                  Создать новый
+                </Button>
               </div>
             </div>
             <div className={classNames["main__work-spaces"]}>
