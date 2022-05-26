@@ -2,9 +2,11 @@ import React, { FC } from "react";
 import { WorkSpace } from "../../icons";
 import classNames from "./index.module.scss";
 
-interface WorkSpaceButtonProps {}
+interface WorkSpaceButtonProps {
+  name: string;
+}
 
-const WorkSpaceButton: FC<WorkSpaceButtonProps> = () => {
+const WorkSpaceButton: FC<WorkSpaceButtonProps> = ({ name }) => {
   return (
     <div className={classNames["workspace-button"]}>
       <div className={classNames["workspace-button__container"]}>
@@ -13,9 +15,7 @@ const WorkSpaceButton: FC<WorkSpaceButtonProps> = () => {
             Рабочая область
           </span>
           <WorkSpace />
-          <span className={classNames["workspace-button__name"]}>
-            “Рабочая область №1”
-          </span>
+          <span className={classNames["workspace-button__name"]}>“{name}”</span>
         </div>
       </div>
     </div>

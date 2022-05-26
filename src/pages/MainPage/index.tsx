@@ -1,8 +1,10 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import WorkSpaceButton from "../../components/WorkSpaceButton";
 import AddWorkSpace from "../../icons/AddWorkSpace";
+import { workspaceSelector } from "../../store/selectors/workspace";
 import classNames from "./index.module.scss";
 import Logo from "./Logo";
 
@@ -10,6 +12,7 @@ interface MainPageProps {}
 
 const MainPage: FC<MainPageProps> = () => {
   const navigation = useNavigate();
+  const workspaces = useSelector(workspaceSelector);
 
   const onClickCreate = () => {
     navigation("/create");
@@ -34,8 +37,8 @@ const MainPage: FC<MainPageProps> = () => {
               </div>
             </div>
             <div className={classNames["main__work-spaces"]}>
-              {[1, 2, 3].map((item) => (
-                <WorkSpaceButton key={item} />
+              {workspaces.map((item) => (
+                <WorkSpaceButton key={item._id} name={item.name} />
               ))}
             </div>
           </div>

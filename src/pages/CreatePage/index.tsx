@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import { Cancel, Save } from "../../icons";
@@ -8,14 +9,23 @@ import classNames from "./index.module.scss";
 interface CreatePageProps {}
 
 const CreatePage: FC<CreatePageProps> = () => {
+  const navigate = useNavigate();
   const { values, handleChange, handleSubmit, errors } = useCreateWorkSpace();
+  const onCancel = () => {
+    navigate(-1);
+  };
   return (
     <div className={classNames["create-page"]}>
       <div className="container">
         <div className={classNames["create-page__content"]}>
           <div className={classNames["create-page__buttons"]}>
             <div className={classNames.button_container}>
-              <Button textSize="big" type="danger" icon={Cancel}>
+              <Button
+                onClick={onCancel}
+                textSize="big"
+                type="danger"
+                icon={Cancel}
+              >
                 Отменить
               </Button>
             </div>

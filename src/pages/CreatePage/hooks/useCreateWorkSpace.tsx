@@ -1,15 +1,19 @@
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import { number, object, string } from "yup";
+import { createWorkspaceAction } from "../../../store/workspace/action";
 
 export const useCreateWorkSpace = () => {
+  const dispatch = useDispatch();
   return useFormik({
     initialValues: {
       name: "",
       port: 0,
       host: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, { resetForm }) => {
+      dispatch(createWorkspaceAction(values));
+      resetForm();
     },
     validationSchema: object({
       name: string().required("Поле обязательно").trim("Поле обязательно"),
