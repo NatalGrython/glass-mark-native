@@ -1,0 +1,27 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+
+  &__label {
+    @include textRoboto(16px, 400, 18px, $dark_primary);
+  }
+
+  &__field {
+    width: 100%;
+    padding-top: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    border: 1px solid $grey_color;
+    border-radius: 10px;
+
+    @include textRoboto(16px, 500, 18px, $grey_color);
+  }
+
+  &__error {
+    @include textRoboto(16px, 400, 18px, $danger_color);
+  }
+}

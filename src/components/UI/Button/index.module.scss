@@ -1,7 +1,13 @@
 .button {
-  @include button;
+  @include button($primary_color, 16px, 500, 21px, #fff);
   width: 100%;
   height: 100%;
+
+  transition: border 0.5s;
+  &:hover {
+    box-shadow: 0px 4px 12px rgba(0, 56, 89, 0.13);
+    border: 1px solid #ffffff;
+  }
 
   &__container {
     width: 100%;
@@ -11,18 +17,39 @@
     justify-content: space-between;
     align-items: center;
   }
-}
-.button-danger {
-  @include button($danger_color);
-  width: 100%;
-  height: 100%;
 
-  &__container {
+  &-big {
+    @include button($primary_color, 22px, 600, 21px, #fff);
     width: 100%;
     height: 100%;
+    transition: border 0.5s;
+    &:hover {
+      box-shadow: 0px 4px 12px rgba(0, 56, 89, 0.13);
+      border: 3px solid #ffffff;
+    }
+  }
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &-danger {
+    @include button($danger_color, 16px, 500, 21px, #fff);
+    width: 100%;
+    height: 100%;
+    width: 100%;
+    height: 100%;
+    transition: border 0.5s;
+    &:hover {
+      box-shadow: 0px 4px 12px rgba(0, 56, 89, 0.13);
+      border: 3px solid #ffffff;
+    }
+
+    &-big {
+      @include button($danger_color, 22px, 600, 21px, #fff);
+      width: 100%;
+      height: 100%;
+      transition: border 0.5s;
+      &:hover {
+        box-shadow: 0px 4px 12px rgba(0, 56, 89, 0.13);
+        border: 3px solid #ffffff;
+      }
+    }
   }
 }

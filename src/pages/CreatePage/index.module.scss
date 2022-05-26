@@ -3,6 +3,8 @@
   height: 100%;
   padding-top: 100px;
   padding-bottom: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
 
   &__content {
     display: flex;
@@ -13,10 +15,74 @@
   &__buttons {
     display: flex;
     gap: 8px;
+    padding-bottom: 54px;
+    border-bottom: 1px solid $grey_color;
   }
 
   .button_container {
     width: 190px;
     height: 55px;
+  }
+
+  &__work {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $grey_color;
+    &__title {
+      flex: 0 1 123px;
+      @include textRoboto(31px, 500, 36px, $black_color);
+    }
+
+    &__input_container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 0 1 80%;
+
+      &__input {
+        flex: 0 1 505px;
+      }
+
+      &__title {
+        flex: 0 1 30%;
+        @include textRoboto(16px, 400, 19px, $grey_color);
+      }
+    }
+  }
+
+  &__server {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      flex: 0 1 123px;
+      @include textRoboto(31px, 500, 36px, $black_color);
+    }
+
+    &__containers {
+      flex: 0 1 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 27px;
+    }
+
+    &__input_container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 0 1 80%;
+
+      &__input {
+        flex: 0 1 505px;
+      }
+
+      &__title {
+        flex: 0 1 30%;
+        @include textRoboto(16px, 400, 19px, $grey_color);
+      }
+    }
   }
 }

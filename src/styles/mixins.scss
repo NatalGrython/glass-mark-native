@@ -16,7 +16,7 @@
   color: $color;
 }
 
-@mixin button($color: $primary_color) {
+@mixin button($color: $primary_color, $text...) {
   display: flex;
   padding: 10px 15px;
   border: none;
@@ -24,6 +24,6 @@
   border-radius: 10px;
 
   span {
-    @include textInter(16px, 500, 21px, #fff);
+    @include textInter($text...);
   }
 }
