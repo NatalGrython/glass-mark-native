@@ -1,0 +1,101 @@
+.work-space-layout {
+  padding-top: 64px;
+  padding-bottom: 28px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  &_names {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text_container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__text__title {
+    @include textRoboto(22px, 500, 25px, $grey_color);
+  }
+  &__text__name {
+    @include textRoboto(22px, 500, 25px, $black_color);
+  }
+
+  &__button_container {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 1 18%;
+  }
+
+  &__exit_button {
+    width: 150px;
+    height: 56px;
+  }
+
+  &__setting_button {
+    width: 56px;
+    height: 56px;
+  }
+
+  &__links {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(48, 58, 64, 0.1);
+    border-radius: 8px;
+    height: 64px;
+    padding: 12px 18px;
+    gap: 24px;
+  }
+
+  &__link {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 11px 18px;
+    align-items: center;
+    background-color: inherit;
+    border: none;
+
+    span {
+      @include textRoboto(20px, 500, 23px, $black_color);
+    }
+
+    &__active {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+      padding: 11px 18px;
+      box-shadow: 0px 4px 12px rgba(16, 156, 241, 0.1);
+      border-radius: 8px;
+      align-items: center;
+      background-color: inherit;
+      border: none;
+      span {
+        @include textRoboto(20px, 500, 23px, $primary_color);
+      }
+    }
+  }
+
+  &__account {
+    width: 162px;
+    height: 40px;
+  }
+  &__blocks {
+    width: 126px;
+    height: 40px;
+  }
+  &__transaction {
+    width: 180px;
+    height: 40px;
+  }
+}

@@ -2,3 +2,8 @@ export { default as WorkSpace } from "./WorkSpace";
 export { default as AddWorkSpace } from "./AddWorkSpace";
 export { default as Save } from "./Save";
 export { default as Cancel } from "./Cancel";
+export { default as Accounts } from "./Accounts";
+export { default as Blocks } from "./Blocks";
+export { default as Exit } from "./Exit";
+export { default as Transaction } from "./Transaction";
+export { default as Setting } from "./Setting";

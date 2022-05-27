@@ -14,6 +14,7 @@ const CreatePage: FC<CreatePageProps> = () => {
   const onCancel = () => {
     navigate(-1);
   };
+
   return (
     <div className={classNames["create-page"]}>
       <div className="container">

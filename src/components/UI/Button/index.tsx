@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from "react";
 import classNames from "./index.module.scss";
 
 interface ButtonProps {
-  children: string;
+  children?: string;
   icon?: FC;
   type?: "danger" | "success";
   textSize?: "small" | "big";
@@ -26,8 +26,13 @@ const Button: FC<ButtonProps> = ({
   const Icon = icon;
   return (
     <button onClick={onClick} className={mapButtonType[`${type}&${textSize}`]}>
-      <div className={classNames.button__container}>
-        <span>{children}</span>
+      <div
+        style={{
+          justifyContent: !children && icon ? "center" : "space-between",
+        }}
+        className={classNames.button__container}
+      >
+        {children && <span>{children}</span>}
         {Icon && <Icon />}
       </div>
     </button>
