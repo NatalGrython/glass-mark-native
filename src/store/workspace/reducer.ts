@@ -3,6 +3,7 @@ import { Workspace } from "../../types/workspace";
 import {
   createWorkspaceSuccessAction,
   deleteCurrentWorkspace,
+  setCurrentWorkspace,
   uploadWorkspaceSuccessAction,
 } from "./action";
 
@@ -19,12 +20,14 @@ export const workspaceReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(createWorkspaceSuccessAction, (state, action) => {
       state.workspaces.push(action.payload);
-      state.current = action.payload;
     })
     .addCase(uploadWorkspaceSuccessAction, (state, action) => {
       state.workspaces = action.payload;
     })
     .addCase(deleteCurrentWorkspace, (state) => {
       state.current = undefined;
+    })
+    .addCase(setCurrentWorkspace, (state, action) => {
+      state.current = action.payload;
     });
 });

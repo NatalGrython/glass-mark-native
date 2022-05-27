@@ -1,5 +1,6 @@
 const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const os = require("os");
+const { app, BrowserWindow, session } = require("electron");
 
 const isDev = process.env.IS_DEV == "true" ? true : false;
 
@@ -27,6 +28,15 @@ function createWindow() {
   }
 }
 
+if (isDev) {
+  const reactDevToolsPath = path.join(
+    os.homedir(),
+    "/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/3.0.11"
+  );
+  app.whenReady().then(async () => {
+    await session.defaultSession.loadExtension(reactDevToolsPath);
+  });
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -37,6 +47,12 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+
+  if (isDev) {
+    session.defaultSession.loadExtension(
+      "~/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd"
+    );
+  }
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

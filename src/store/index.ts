@@ -8,9 +8,10 @@ import { all } from "redux-saga/effects";
 import { workspaceReducer } from "./workspace/reducer";
 import { workspaceWatcher } from "./workspace/saga";
 import { history } from "../utils/history";
+import { watcherSocket } from "./socket/saga";
 
 function* rootSaga() {
-  yield all([workspaceWatcher()]);
+  yield all([workspaceWatcher(), watcherSocket()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
