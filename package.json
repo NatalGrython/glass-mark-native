@@ -16,6 +16,7 @@
     "app:build": "npm run build:for:electron && npm run electron:builder"
   },
   "dependencies": {
+    "@lagunovsky/redux-react-router": "^3.2.0",
     "@reduxjs/toolkit": "^1.8.2",
     "formik": "^2.2.9",
     "nedb-promises": "^6.0.3",

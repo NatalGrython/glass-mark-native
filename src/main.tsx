@@ -4,13 +4,15 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
 import App from "./App";
+import { ReduxRouter } from "@lagunovsky/redux-react-router";
+import { history } from "./utils/history";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <ReduxRouter store={store} history={history}>
         <App />
-      </BrowserRouter>
+      </ReduxRouter>
     </Provider>
   </React.StrictMode>
 );

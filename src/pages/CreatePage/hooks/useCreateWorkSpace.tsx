@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { number, object, string } from "yup";
 import { createWorkspaceAction } from "../../../store/workspace/action";
 
@@ -13,6 +14,7 @@ export const useCreateWorkSpace = () => {
     },
     onSubmit: (values, { resetForm }) => {
       dispatch(createWorkspaceAction(values));
+
       resetForm();
     },
     validationSchema: object({
