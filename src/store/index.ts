@@ -9,9 +9,13 @@ import { workspaceReducer } from "./workspace/reducer";
 import { workspaceWatcher } from "./workspace/saga";
 import { history } from "../utils/history";
 import { watcherSocket } from "./socket/saga";
+import { blocksReducer } from "./blocks/reducer";
+import { transactionsReducer } from "./transactions/reducer";
+import { addressesReducer } from "./adresses/reducer";
+import { chainWatcher } from "./chain/saga";
 
 function* rootSaga() {
-  yield all([workspaceWatcher(), watcherSocket()]);
+  yield all([workspaceWatcher(), watcherSocket(), chainWatcher()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -20,6 +24,9 @@ const routerMiddleware = createRouterMiddleware(history);
 export const store = configureStore({
   reducer: {
     workspace: workspaceReducer,
+    block: blocksReducer,
+    transaction: transactionsReducer,
+    address: addressesReducer,
     //@ts-ignore
     router: createRouterReducer(history),
   },

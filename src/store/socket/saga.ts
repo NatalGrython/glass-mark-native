@@ -10,6 +10,7 @@ import {
 } from "redux-saga/effects";
 import { io } from "socket.io-client";
 import { Workspace } from "../../types/workspace";
+import { updateChainAction } from "../chain/actions";
 import { CREATE_WORKSPACE_REJECT } from "../workspace/constants";
 import {
   listenWorkSpaceAction,
@@ -45,7 +46,7 @@ const wsClient = (host: string, port: number) =>
     });
 
     client.on("chain", (data) => {
-      emitter({ type: "FULL_CHAIN", payload: data });
+      emitter(updateChainAction(data));
     });
 
     client.on("block", (data) => {

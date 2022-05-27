@@ -1,6 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 import { Workspace } from "../../types/workspace";
 import {
+  LISTEN_STOP,
   LISTEN_WORKSPACE,
   LISTEN_WORKSPACE_REJECT,
   LISTEN_WORKSPACE_SUCCESS,
@@ -14,3 +15,5 @@ export const listenWorkSpaceSuccessAction = createAction(
 export const listenWorkSpaceRejectAction = createAction(
   LISTEN_WORKSPACE_REJECT
 );
+
+export const listenStopAction = createAction(LISTEN_STOP);

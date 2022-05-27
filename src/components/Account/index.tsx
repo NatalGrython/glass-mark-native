@@ -11,7 +11,9 @@ const Account: FC<AccountProps> = ({ address, balls }) => {
     <div className={classNames.account}>
       <div className={classNames.account__container}>
         <span className={classNames.account__title}>Адрес пользователя</span>
-        <span className={classNames.account__name}>{address}</span>
+        <div className={classNames.account__address}>
+          <span className={classNames.account__name}>{address}</span>
+        </div>
       </div>
       <div className={classNames.account__container}>
         <span className={classNames.account__title}>Баллы</span>

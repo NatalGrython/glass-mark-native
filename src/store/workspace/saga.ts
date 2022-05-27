@@ -8,11 +8,13 @@ import {
   takeLeading,
 } from "redux-saga/effects";
 import { Workspace } from "../../types/workspace";
+import { deleteChainAction } from "../chain/actions";
 import { workspaceSelector } from "../selectors/workspace";
 import {
   listenWorkSpaceAction,
   listenWorkSpaceSuccessAction,
   listenWorkSpaceRejectAction,
+  listenStopAction,
 } from "../socket/action";
 import {
   LISTEN_WORKSPACE_REJECT,
@@ -29,6 +31,7 @@ import {
 } from "./action";
 import {
   CREATE_WORKSPACE,
+  DELETE_CURRENT_WORKSPACE,
   SELECT_WORKSPACE,
   UPLOAD_WORKSPACES,
 } from "./constants";
@@ -101,15 +104,22 @@ function* uploadWorkspace() {
     if (store) {
       const data: Workspace[] = yield call(store.findAll);
       yield put(uploadWorkspaceSuccessAction(data));
+    } else {
+      throw new Error("");
     }
-    throw new Error("");
   } catch (error) {
     yield put(uploadWorkspaceReject());
   }
+}
+
+function* deleteCurrentWorkspace() {
+  yield put(listenStopAction());
+  yield put(deleteChainAction());
 }
 
 export function* workspaceWatcher() {
   yield takeEvery(CREATE_WORKSPACE, createWorkspace);
   yield takeLeading(UPLOAD_WORKSPACES, uploadWorkspace);
   yield takeLeading(SELECT_WORKSPACE, selectWorkSpace);
+  yield takeEvery(DELETE_CURRENT_WORKSPACE, deleteCurrentWorkspace);
 }

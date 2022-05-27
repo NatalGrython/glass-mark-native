@@ -7,6 +7,8 @@ declare const classNames: {
   readonly text_container: "text_container";
   readonly text__title: "text__title";
   readonly text__value: "text__value";
+  readonly text__address_value: "text__address_value";
+  readonly text__address_container: "text__address_container";
 };
 export default classNames;
 export type ClassNames =
@@ -17,4 +19,6 @@ export type ClassNames =
   | "info__container"
   | "text_container"
   | "text__title"
-  | "text__value";
+  | "text__value"
+  | "text__address_value"
+  | "text__address_container";

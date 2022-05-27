@@ -1,20 +1,23 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import Account from "../../components/Account";
+import { addressSelector } from "../../store/selectors/workspace";
 import classNames from "./index.module.scss";
 
 interface AccountsPageProps {}
 
 const AccountsPage: FC<AccountsPageProps> = () => {
+  const addresses = useSelector(addressSelector);
   return (
     <div className={classNames.accounts}>
       <div className="container">
         <div className={classNames.accounts__content}>
           <div className={classNames.accounts__accounts}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+            {addresses.map((item) => (
               <Account
-                key={item}
-                address="0×03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
-                balls={78}
+                key={item.address}
+                address={item.address}
+                balls={item.balance}
               />
             ))}
           </div>

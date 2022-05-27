@@ -27,11 +27,19 @@ const Transaction: FC<TransactionProps> = ({
       <div className={classNames.info__container}>
         <div className={classNames.text_container}>
           <span className={classNames.text__title}>Адрес отправителя</span>
-          <span className={classNames.text__value}>{addressSender}</span>
+          <div className={classNames.text__address_container}>
+            <span className={classNames.text__address_value}>
+              {addressSender}
+            </span>
+          </div>
         </div>
         <div className={classNames.text_container}>
           <span className={classNames.text__title}>Адрес получателя</span>
-          <span className={classNames.text__value}>{addressRecipient}</span>
+          <div className={classNames.text__address_container}>
+            <span className={classNames.text__address_value}>
+              {addressRecipient}
+            </span>
+          </div>
         </div>
         <div className={classNames.text_container}>
           <span className={classNames.text__title}>Причина</span>

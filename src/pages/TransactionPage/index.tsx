@@ -1,22 +1,26 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import Transaction from "../../components/Transaction";
+import { transactionSelector } from "../../store/selectors/workspace";
 import classNames from "./index.module.scss";
 interface TransactionPageProps {}
 
 const TransactionPage: FC<TransactionPageProps> = () => {
+  const transactions = useSelector(transactionSelector);
   return (
     <div className={classNames.transaction}>
       <div className="container">
         <div className={classNames.transaction__content}>
           <div className={classNames.transaction__transactions}>
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {transactions.map((item) => (
               <Transaction
-                hash="0×03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
-                balls={10}
+                key={item.randomBytes}
+                hash={item.currentHash}
+                balls={item.value}
                 numberBlock={1}
-                reason="Контрольная работа"
-                addressSender="0×03ac674216f3e15c761ee1a5e255f06"
-                addressRecipient={"0×03ac674216f3e15c761ee1a5e255f06"}
+                reason={item.reason}
+                addressSender={item.sender}
+                addressRecipient={item.receiver}
               />
             ))}
           </div>

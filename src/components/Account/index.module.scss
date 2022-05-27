@@ -16,5 +16,14 @@
 
   &__name {
     @include textRoboto(20px, 400, 23px, $black_color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 100%;
+  }
+
+  &__address {
+    max-width: 500px;
   }
 }

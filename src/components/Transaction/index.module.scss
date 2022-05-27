@@ -33,5 +33,17 @@
     .text__value {
       @include textRoboto(16px, 400, 18px, $black_color);
     }
+
+    .text__address_value {
+      @include textRoboto(16px, 400, 18px, $black_color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      width: 100%;
+    }
+    .text__address_container {
+      max-width: 300px;
+    }
   }
 }

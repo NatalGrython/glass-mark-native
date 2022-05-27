@@ -1,0 +1,2 @@
+export const UPDATE_BLOCKS = "UPDATE_BLOCKS";
+export const DELETE_BLOCKS = "DELETE_BLOCKS";

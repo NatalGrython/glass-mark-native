@@ -1,6 +1,9 @@
+import { format } from "date-fns";
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Block from "../../components/Block";
+import { blocksSelector } from "../../store/selectors/workspace";
 import classNames from "./index.module.scss";
 
 interface BlocksPageProps {}
@@ -8,8 +11,10 @@ interface BlocksPageProps {}
 const BlocksPage: FC<BlocksPageProps> = () => {
   const navigation = useNavigate();
   const { id } = useParams();
-  const onClickBlock = (address: string) => () => {
-    navigation(`/workspace/${id}/blocks/${address}`);
+  const blocks = useSelector(blocksSelector);
+
+  const onClickBlock = (hash: string) => () => {
+    navigation(`/workspace/${id}/blocks/${hash}`);
   };
 
   return (
@@ -17,14 +22,19 @@ const BlocksPage: FC<BlocksPageProps> = () => {
       <div className="container">
         <div className={classNames.blocks__content}>
           <div className={classNames.blocks}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+            {blocks.map((item, index) => (
               <Block
-                key={item}
+                key={item.currentHash}
                 index={index}
-                timestamp={"12.03.2022 | 04:01:10"}
-                address="0×7953623c8b388b4459e13f978d7c846f4"
-                countTransactions={16}
-                onClick={onClickBlock("0×7953623c8b388b4459e13f978d7c846f4")}
+                timestamp={
+                  item.timestamp
+                    ? format(new Date(item.timestamp), "dd.MM.yyyy | kk.mm.ss")
+                    : "GENESIS"
+                }
+                address={item.currentHash}
+                countTransactions={item.transactions.length}
+                onClick={onClickBlock(item.currentHash)}
+                genesis={item.previousHash === "GENESIS_BLOCK"}
               />
             ))}
           </div>

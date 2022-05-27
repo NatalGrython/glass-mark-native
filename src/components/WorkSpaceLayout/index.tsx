@@ -1,8 +1,11 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Accounts, Blocks, Exit, Setting, Transaction } from "../../icons";
-import { currentWorkspaceSelector } from "../../store/selectors/workspace";
+import {
+  blocksSelector,
+  currentWorkspaceSelector,
+} from "../../store/selectors/workspace";
 import { deleteCurrentWorkspace } from "../../store/workspace/action";
 import Button from "../UI/Button";
 import { useTabs } from "./hooks/useTabs";
@@ -13,12 +16,11 @@ interface WorkSpaceLayoutProps {}
 const WorkSpaceLayout: FC<WorkSpaceLayoutProps> = () => {
   const { currentTab, onChangeTab } = useTabs();
   const currentWorkSpace = useSelector(currentWorkspaceSelector);
+  const blocks = useSelector(blocksSelector);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onExit = () => {
     dispatch(deleteCurrentWorkspace());
-    navigate("/", { replace: true });
   };
 
   if (!currentWorkSpace) {
@@ -44,7 +46,7 @@ const WorkSpaceLayout: FC<WorkSpaceLayoutProps> = () => {
                   Количевсто блоков
                 </span>
                 <span className={classNames["work-space-layout__text__name"]}>
-                  8
+                  {blocks.length}
                 </span>
               </div>
               <div className={classNames["work-space-layout__text_container"]}>
