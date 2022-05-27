@@ -1,0 +1,50 @@
+.current-block {
+  padding-bottom: 64px;
+  &__content {
+    height: 560px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(48, 58, 64, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  &__transactions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    padding: 21px;
+    height: 82px;
+    box-shadow: 0px 4px 12px rgba(48, 58, 64, 0.1);
+    border-radius: 8px 8px 0px 0px;
+    background: #ffffff;
+
+    &__container {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    &__button {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff;
+      border: 2px solid $primary_color;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    &__title {
+      @include textRoboto(22px, 400, 26px, $dark_primary);
+    }
+  }
+}

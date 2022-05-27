@@ -1,0 +1,37 @@
+.transaction {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 24px;
+  border-bottom: 1px solid $grey_color;
+
+  &__title_container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .title {
+      @include textRoboto(20px, 400, 23px, $grey_color);
+    }
+    .value {
+      @include textRoboto(20px, 400, 23px, $black_color);
+    }
+  }
+
+  .info__container {
+    display: flex;
+    justify-content: space-between;
+
+    .text_container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .text__title {
+      @include textRoboto(16px, 400, 18px, $grey_color);
+    }
+    .text__value {
+      @include textRoboto(16px, 400, 18px, $black_color);
+    }
+  }
+}

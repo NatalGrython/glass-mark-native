@@ -7,3 +7,4 @@ export { default as Blocks } from "./Blocks";
 export { default as Exit } from "./Exit";
 export { default as Transaction } from "./Transaction";
 export { default as Setting } from "./Setting";
+export { default as Arrow } from "./Arrow";

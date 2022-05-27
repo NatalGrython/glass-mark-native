@@ -1,0 +1,20 @@
+.account {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid $grey_color;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__title {
+    @include textRoboto(20px, 400, 23px, $grey_color);
+  }
+
+  &__name {
+    @include textRoboto(20px, 400, 23px, $black_color);
+  }
+}

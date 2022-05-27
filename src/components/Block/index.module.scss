@@ -1,0 +1,27 @@
+.block {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid $grey_color;
+
+  .block_container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .button_container {
+    width: 224px;
+    height: 41px;
+  }
+
+  &__title {
+    @include textRoboto(20px, 400, 23px, $black_color);
+  }
+  &__name {
+    @include textRoboto(16px, 400, 19px, $grey_color);
+  }
+  &__value {
+    @include textRoboto(16px, 400, 19px, $black_color);
+  }
+}
