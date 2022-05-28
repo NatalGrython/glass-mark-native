@@ -17,3 +17,8 @@ export const listenWorkSpaceRejectAction = createAction(
 );
 
 export const listenStopAction = createAction(LISTEN_STOP);
+
+export type SocketActions =
+  | ReturnType<typeof listenWorkSpaceAction>
+  | ReturnType<typeof listenWorkSpaceSuccessAction>
+  | ReturnType<typeof listenWorkSpaceRejectAction>;

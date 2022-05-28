@@ -19,5 +19,10 @@ electron.contextBridge.exposeInMainWorld("api", {
     },
     findById: (id) => store.findById(id),
     create: (data) => store.create(data),
+    update: async (id, data) => {
+      await store.update(id, data);
+      return store.findById(id);
+    },
+    delete: (id) => store.delete(id),
   },
 });

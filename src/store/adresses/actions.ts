@@ -4,3 +4,7 @@ import { UPDATE_ADDRESSES, DELETE_ADDRESSES } from "./constants";
 
 export const updateAddressesAction = createAction<Address[]>(UPDATE_ADDRESSES);
 export const deleteAddressesAction = createAction(DELETE_ADDRESSES);
+
+export type AddressActions =
+  | ReturnType<typeof updateAddressesAction>
+  | ReturnType<typeof deleteAddressesAction>;

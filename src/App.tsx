@@ -7,6 +7,7 @@ import AccountsPage from "./pages/AccountsPage";
 import BlocksPage from "./pages/BlocksPage";
 import CreatePage from "./pages/CreatePage";
 import CurrentBlockPage from "./pages/CurrentBlockPage";
+import EditPage from "./pages/EditPage";
 import MainPage from "./pages/MainPage";
 import TransactionPage from "./pages/TransactionPage";
 import { uploadWorkspaceAction } from "./store/workspace/action";
@@ -24,6 +25,7 @@ function App() {
       <Route element={<Layout />}>
         <Route index element={<MainPage />} />
         <Route path="/create" element={<CreatePage />} />
+        <Route path="/edit" element={<EditPage />} />
         <Route path="/workspace/:id" element={<WorkSpaceLayout />}>
           <Route path="accounts" element={<AccountsPage />} />
           <Route path="blocks">

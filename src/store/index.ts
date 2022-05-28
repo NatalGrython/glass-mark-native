@@ -13,6 +13,12 @@ import { blocksReducer } from "./blocks/reducer";
 import { transactionsReducer } from "./transactions/reducer";
 import { addressesReducer } from "./adresses/reducer";
 import { chainWatcher } from "./chain/saga";
+import { AddressActions } from "./adresses/actions";
+import { BlocksActions } from "./blocks/actions";
+import { ChainActions } from "./chain/actions";
+import { SocketActions } from "./socket/action";
+import { TransactionActions } from "./transactions/actions";
+import { WorkspaceActions } from "./workspace/action";
 
 function* rootSaga() {
   yield all([workspaceWatcher(), watcherSocket(), chainWatcher()]);
@@ -40,4 +46,13 @@ export const store = configureStore({
 
 sagaMiddleware.run(rootSaga);
 
+store.dispatch;
+
 export type RootState = ReturnType<typeof store.getState>;
+export type RootAction =
+  | AddressActions
+  | BlocksActions
+  | ChainActions
+  | SocketActions
+  | TransactionActions
+  | WorkspaceActions;

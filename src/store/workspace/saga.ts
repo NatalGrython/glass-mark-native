@@ -1,12 +1,18 @@
 import { push } from "@lagunovsky/redux-react-router";
+import { Action } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import {
-  call,
   put,
-  select,
   take,
+  call,
+  select,
   takeEvery,
+  takeLatest,
   takeLeading,
 } from "redux-saga/effects";
+import { TypeOf } from "yup";
+
+import { RootAction } from "..";
 import { Workspace } from "../../types/workspace";
 import { deleteChainAction } from "../chain/actions";
 import { workspaceSelector } from "../selectors/workspace";
@@ -22,80 +28,74 @@ import {
 } from "../socket/constants";
 import {
   createWorkspaceAction,
-  createWorkspaceRejectAction,
   createWorkspaceSuccessAction,
   uploadWorkspaceSuccessAction,
-  uploadWorkspaceReject,
   setCurrentWorkspace,
   selectWorkspaceAction,
+  updateWorkspaceAction,
+  updateWorkspaceSuccessAction,
+  deleteWorkspaceSuccessAction,
 } from "./action";
 import {
   CREATE_WORKSPACE,
   DELETE_CURRENT_WORKSPACE,
+  DELETE_WORKSPACE,
   SELECT_WORKSPACE,
+  UPDATE_WORKSPACE,
   UPLOAD_WORKSPACES,
 } from "./constants";
 
 //@ts-ignore
 const store = window?.api?.store;
 
-function* createWorkspace(action: ReturnType<typeof createWorkspaceAction>) {
-  try {
-    yield put(listenWorkSpaceAction(action.payload));
-    const result:
-      | ReturnType<typeof listenWorkSpaceSuccessAction>
-      | ReturnType<typeof listenWorkSpaceRejectAction> = yield take([
-      LISTEN_WORKSPACE_SUCCESS,
-      LISTEN_WORKSPACE_REJECT,
-    ]);
+function* listenWorkspace(workspace: Omit<Workspace, "_id">) {
+  yield put(listenWorkSpaceAction(workspace));
+  const action:
+    | ReturnType<typeof listenWorkSpaceSuccessAction>
+    | ReturnType<typeof listenWorkSpaceRejectAction> = yield take<
+    Action<string>
+  >([LISTEN_WORKSPACE_SUCCESS, LISTEN_WORKSPACE_REJECT]);
 
-    switch (result.type) {
-      case LISTEN_WORKSPACE_SUCCESS:
-        if (store) {
-          const data: Workspace = yield call(store.create, action.payload);
-          yield put(createWorkspaceSuccessAction(data));
-          yield put(setCurrentWorkspace(data));
-          yield put(push(`/workspace/${data._id}/accounts`));
-        }
-        throw new Error("");
-        break;
-      case LISTEN_WORKSPACE_REJECT:
-        throw new Error("");
-      default:
-        throw new Error("");
-    }
-  } catch (error) {
-    yield put(createWorkspaceRejectAction());
+  switch (action.type) {
+    case LISTEN_WORKSPACE_SUCCESS:
+      return true;
+    case LISTEN_WORKSPACE_REJECT:
+      return false;
+    default:
+      return false;
   }
 }
 
-function* selectWorkSpace(action: ReturnType<typeof selectWorkspaceAction>) {
+function* createWorkspace(action: ReturnType<typeof createWorkspaceAction>) {
   try {
-    const workspaces: Workspace[] = yield select(workspaceSelector);
-    const currentWorkSpace = workspaces.find(
-      (workspace) => workspace._id === action.payload
-    );
-    if (currentWorkSpace) {
-      yield put(listenWorkSpaceAction(currentWorkSpace));
-      const result:
-        | ReturnType<typeof listenWorkSpaceSuccessAction>
-        | ReturnType<typeof listenWorkSpaceRejectAction> = yield take([
-        LISTEN_WORKSPACE_SUCCESS,
-        LISTEN_WORKSPACE_REJECT,
-      ]);
-      switch (result.type) {
-        case LISTEN_WORKSPACE_SUCCESS:
-          yield put(setCurrentWorkspace(currentWorkSpace));
-          yield put(push(`/workspace/${currentWorkSpace._id}/accounts`));
-          break;
-        case LISTEN_WORKSPACE_REJECT:
-          throw new Error("");
-        default:
-          throw new Error("");
-      }
+    const stable = yield* listenWorkspace(action.payload);
+    if (stable) {
+      const newWorkspace: Workspace = yield call(store.create, action.payload);
+      yield put(createWorkspaceSuccessAction(newWorkspace));
+      yield put(setCurrentWorkspace(newWorkspace));
+      yield put(push(`/workspace/${newWorkspace._id}/accounts`));
     }
   } catch (error) {
-    console.log(error);
+    yield call(toast, "Произошла неизвестная ошибка");
+  }
+}
+
+function* updateWorkspace(action: ReturnType<typeof updateWorkspaceAction>) {
+  try {
+    const stable = yield* listenWorkspace(action.payload);
+    if (stable) {
+      const { _id, ...workspace } = action.payload;
+      const updatedWorkspace: Workspace[] = yield call(
+        store.update,
+        _id,
+        workspace
+      );
+      yield put(updateWorkspaceSuccessAction(updatedWorkspace[0]));
+      yield put(setCurrentWorkspace(updatedWorkspace[0]));
+      yield put(push(`/workspace/${updatedWorkspace[0]._id}/accounts`));
+    }
+  } catch (error) {
+    yield call(toast, "Произошла неизвестная ошибка");
   }
 }
 
@@ -105,10 +105,41 @@ function* uploadWorkspace() {
       const data: Workspace[] = yield call(store.findAll);
       yield put(uploadWorkspaceSuccessAction(data));
     } else {
-      throw new Error("");
+      yield call(toast, "Нет доступа к файлу с рабочими обласятями");
     }
   } catch (error) {
-    yield put(uploadWorkspaceReject());
+    yield call(toast, "Произошла неизвестная ошибка");
+  }
+}
+
+function* deleteWorkspace(aciton: any) {
+  try {
+    if (store) {
+      yield call(store.delete, aciton.payload._id);
+
+      yield put(deleteWorkspaceSuccessAction(aciton.payload));
+      yield put(push("/"));
+    } else {
+      yield call(toast, "Нет доступа к файлу с рабочими обласятями");
+    }
+  } catch (error) {
+    yield call(toast, "Произошла неизвестная ошибка");
+  }
+}
+
+function* selectWorkSpace(action: ReturnType<typeof selectWorkspaceAction>) {
+  try {
+    const workspaces: Workspace[] = yield select(workspaceSelector);
+    const currentWorkSpace = workspaces.find(
+      (workspace) => workspace._id === action.payload
+    );
+
+    if (currentWorkSpace) {
+      yield put(setCurrentWorkspace(currentWorkSpace));
+      yield put(push("/edit"));
+    }
+  } catch (error) {
+    yield call(toast, "Произошла неизвестная ошибка");
   }
 }
 
@@ -119,7 +150,9 @@ function* deleteCurrentWorkspace() {
 
 export function* workspaceWatcher() {
   yield takeEvery(CREATE_WORKSPACE, createWorkspace);
-  yield takeLeading(UPLOAD_WORKSPACES, uploadWorkspace);
+  yield takeLatest(UPLOAD_WORKSPACES, uploadWorkspace);
   yield takeLeading(SELECT_WORKSPACE, selectWorkSpace);
   yield takeEvery(DELETE_CURRENT_WORKSPACE, deleteCurrentWorkspace);
+  yield takeLatest(UPDATE_WORKSPACE, updateWorkspace);
+  yield takeEvery(DELETE_WORKSPACE, deleteWorkspace);
 }

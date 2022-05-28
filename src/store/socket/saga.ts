@@ -9,9 +9,7 @@ import {
   takeLeading,
 } from "redux-saga/effects";
 import { io } from "socket.io-client";
-import { Workspace } from "../../types/workspace";
 import { updateChainAction } from "../chain/actions";
-import { CREATE_WORKSPACE_REJECT } from "../workspace/constants";
 import {
   listenWorkSpaceAction,
   listenWorkSpaceRejectAction,
@@ -109,7 +107,7 @@ function* listenWorkSpace(action: ReturnType<typeof listenWorkSpaceAction>) {
     action.payload.port
   );
 
-  yield take([LISTEN_WORKSPACE_REJECT, LISTEN_STOP, CREATE_WORKSPACE_REJECT]);
+  yield take([LISTEN_WORKSPACE_REJECT, LISTEN_STOP]);
 
   yield cancel(listenTask);
 }
