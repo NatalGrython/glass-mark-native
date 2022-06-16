@@ -58,7 +58,9 @@ const Transaction: FC<TransactionProps> = ({
         </div>
         <div className={classNames.text_container}>
           <span className={classNames.text__title}>Причина</span>
-          <span className={classNames.text__value}>{reason}</span>
+          <div className={classNames.text__address_container}>
+            <span className={classNames.text__value}>{reason}</span>
+          </div>
         </div>
         <div className={classNames.text_container}>
           <span className={classNames.text__title}>Номер блока</span>

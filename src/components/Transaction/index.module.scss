@@ -30,8 +30,10 @@
   }
 
   .info__container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    // display: flex;
+    // justify-content: space-between;
 
     .text_container {
       display: flex;
@@ -42,6 +44,14 @@
       @include textRoboto(16px, 400, 18px, $grey_color);
     }
     .text__value {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      width: 100%;
       @include textRoboto(16px, 400, 18px, $black_color);
     }
 
@@ -54,7 +64,7 @@
       width: 100%;
     }
     .text__address_container {
-      max-width: 300px;
+      max-width: 200px;
     }
   }
 }
