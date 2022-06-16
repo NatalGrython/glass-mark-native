@@ -10,5 +10,8 @@ export const addressSelector = (state: RootState) => state.address.addresses;
 
 export const blocksSelector = (state: RootState) => state.block.blocks;
 
-export const transactionSelector = (state: RootState) =>
-  state.transaction.transactions;
+export const transactionSelector = (state: RootState) => ({
+  transactions: state.transaction.transactions.filter(
+    (tx) => tx.sender !== "STORAGE_CHAIN"
+  ),
+});

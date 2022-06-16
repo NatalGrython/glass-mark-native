@@ -8,5 +8,8 @@ export const useBlockTransactions = () => {
 
   const currentBlock = blocks.find((item) => item.currentHash === blockAddress);
 
-  return currentBlock?.transactions ?? [];
+  return (
+    currentBlock?.transactions.filter((tx) => tx.sender !== "STORAGE_CHAIN") ??
+    []
+  );
 };

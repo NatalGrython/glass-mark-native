@@ -32,7 +32,11 @@ const BlocksPage: FC<BlocksPageProps> = () => {
                     : "GENESIS"
                 }
                 address={item.currentHash}
-                countTransactions={item.transactions.length}
+                countTransactions={
+                  item.transactions.filter(
+                    (tx) => tx.sender !== "STORAGE_CHAIN"
+                  ).length
+                }
                 onClick={onClickBlock(item.currentHash)}
                 genesis={item.previousHash === "GENESIS_BLOCK"}
               />

@@ -1,4 +1,7 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { cancelTransactionAction } from "../../store/transactions/actions";
+import Button from "../UI/Button";
 import classNames from "./index.module.scss";
 
 interface TransactionProps {
@@ -18,11 +21,23 @@ const Transaction: FC<TransactionProps> = ({
   numberBlock,
   balls,
 }) => {
+  const dispatch = useDispatch();
+  const onCancelTransaction = () => {
+    dispatch(cancelTransactionAction(hash));
+  };
+
   return (
     <div className={classNames.transaction}>
-      <div className={classNames.transaction__title_container}>
-        <span className={classNames.title}>Хэш транзакции</span>
-        <span className={classNames.value}>{hash}</span>
+      <div className={classNames.transaction__title_wrapper}>
+        <div className={classNames.transaction__title_container}>
+          <span className={classNames.title}>Хэш транзакции</span>
+          <span className={classNames.value}>{hash}</span>
+        </div>
+        <div className={classNames.transaction__delete_container}>
+          <Button onClick={onCancelTransaction} type="danger">
+            Отменить
+          </Button>
+        </div>
       </div>
       <div className={classNames.info__container}>
         <div className={classNames.text_container}>

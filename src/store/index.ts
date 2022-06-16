@@ -19,9 +19,15 @@ import { ChainActions } from "./chain/actions";
 import { SocketActions } from "./socket/action";
 import { TransactionActions } from "./transactions/actions";
 import { WorkspaceActions } from "./workspace/action";
+import { transactionWatcher } from "./transactions/saga";
 
 function* rootSaga() {
-  yield all([workspaceWatcher(), watcherSocket(), chainWatcher()]);
+  yield all([
+    workspaceWatcher(),
+    watcherSocket(),
+    chainWatcher(),
+    transactionWatcher(),
+  ]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

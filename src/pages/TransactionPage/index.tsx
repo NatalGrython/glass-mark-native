@@ -6,7 +6,7 @@ import classNames from "./index.module.scss";
 interface TransactionPageProps {}
 
 const TransactionPage: FC<TransactionPageProps> = () => {
-  const transactions = useSelector(transactionSelector);
+  const { transactions } = useSelector(transactionSelector);
   return (
     <div className={classNames.transaction}>
       <div className="container">

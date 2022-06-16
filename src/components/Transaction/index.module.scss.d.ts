@@ -1,5 +1,7 @@
 declare const classNames: {
   readonly transaction: "transaction";
+  readonly transaction__title_wrapper: "transaction__title_wrapper";
+  readonly transaction__delete_container: "transaction__delete_container";
   readonly transaction__title_container: "transaction__title_container";
   readonly title: "title";
   readonly value: "value";
@@ -13,6 +15,8 @@ declare const classNames: {
 export default classNames;
 export type ClassNames =
   | "transaction"
+  | "transaction__title_wrapper"
+  | "transaction__delete_container"
   | "transaction__title_container"
   | "title"
   | "value"
